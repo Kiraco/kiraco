@@ -40,6 +40,8 @@ func TestMain(t *testing.T) {
 		{Domain: "omega", Output: `["omega"]`},
 		{Domain: "beta", Output: `["beta","omega"]`},
 		{Domain: "alpha", Output: `["alpha","beta","omega"]`},
+		{Domain: "omega", Output: `["alpha","beta","omega","omega"]`},
+		{Domain: "beta", Output: `["alpha","beta","beta","omega","omega"]`},
 	}
 	valuesToCompare := &Response{}
 	client := &http.Client{}
@@ -57,7 +59,6 @@ func TestMain(t *testing.T) {
 
 		err = json.Unmarshal(bytes, valuesToCompare)
 		assert.Nil(t, err)
-		fmt.Println(valuesToCompare.Response)
 		assert.Equal(t, singleCase.Output, valuesToCompare.Response)
 	}
 }
