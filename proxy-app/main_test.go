@@ -32,14 +32,14 @@ type ResponseText struct {
 }
 
 func TestMain(t *testing.T) {
-	main()
-
 	cases := []struct {
 		Domain string
 		Output string
 	}{
-		{Domain: "alpha", Output: `["alpha"]`},
 		{Domain: "", Output: "domain error"},
+		{Domain: "omega", Output: `["omega"]`},
+		{Domain: "beta", Output: `["beta","omega"]`},
+		{Domain: "alpha", Output: `["alpha","beta","omega"]`},
 	}
 	valuesToCompare := &Response{}
 	client := &http.Client{}
